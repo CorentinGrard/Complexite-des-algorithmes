@@ -2,10 +2,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 #define BUFFER_LENGHT 255
 #define SIZE 20
-#define FILE_NAME "cloud20-2"
+#define FILE_NAME "cloud20-1"
 
 double theta(double x1, double y1, double x2, double y2);
 void swap(double points[][2], int i, int j);
@@ -19,8 +20,12 @@ int main(int argc, char **argv)
 
     readFile(points);
 
+    clock_t start = clock();
     int i_conv = wrap(points, SIZE);
+    clock_t end = clock();
+    double time = ((double)end - start) / CLOCKS_PER_SEC;
     printf("number of points : %d\n", i_conv);
+    printf("Time of exec : %f\n", time);
     for (int k = 0; k < i_conv; k++)
     {
         printf("point %d (%f,%f)\n", k, points[k][0], points[k][1]);
@@ -117,7 +122,8 @@ void exportPoint(double points[][2], int nbPoints)
     fclose(fp);
 }
 
-void readFile(double points[][2]){
+void readFile(double points[][2])
+{
     char buffer[BUFFER_LENGHT];
 
     FILE *filePointer = fopen("Benchmark/" FILE_NAME ".txt", "r");
