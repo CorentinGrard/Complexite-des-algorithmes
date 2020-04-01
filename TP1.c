@@ -11,13 +11,13 @@ double theta(double x1, double y1, double x2, double y2);
 void swap(double points[][2], int i, int j);
 int wrap(double points[][2], int dim);
 void exportPoint(double points[][2], int nbPoints);
-void readFile(double [][2] points);
+void readFile(double points[][2]);
 
 int main(int argc, char **argv)
 {
     double points[1290][2];
 
-    readFile(double [][2] points);
+    readFile(points);
 
     int i_conv = wrap(points, SIZE);
     printf("number of points : %d\n", i_conv);
@@ -117,14 +117,13 @@ void exportPoint(double points[][2], int nbPoints)
     fclose(fp);
 }
 
-double [][2] readFile(double [][2] points){
+void readFile(double points[][2]){
     char buffer[BUFFER_LENGHT];
 
     FILE *filePointer = fopen("Benchmark/" FILE_NAME ".txt", "r");
     if (filePointer == NULL)
     {
         perror("fopen()");
-        return EXIT_FAILURE;
     }
     int i = 0;
     while (fgets(buffer, BUFFER_LENGHT, filePointer))
@@ -140,5 +139,4 @@ double [][2] readFile(double [][2] points){
         i++;
     }
     fclose(filePointer);
-    return points;
 }
