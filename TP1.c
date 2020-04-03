@@ -5,8 +5,8 @@
 #include <time.h>
 
 #define BUFFER_LENGHT 255
-#define SIZE 20
-#define FILE_NAME "cloud20-1"
+#define SIZE 1280
+#define FILE_NAME "cloud1280-1"
 
 double theta(double x1, double y1, double x2, double y2);
 void swap(double points[][2], int i, int j);
@@ -16,7 +16,7 @@ void readFile(double points[][2]);
 
 int main(int argc, char **argv)
 {
-    double points[1290][2];
+    double points[SIZE + 1][2];
 
     readFile(points);
 
