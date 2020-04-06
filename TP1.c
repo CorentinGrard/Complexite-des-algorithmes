@@ -136,7 +136,7 @@ void readFile(double points[][2])
     {
         char *token = strtok(buffer, ",");
         int j = 0;
-        while (token != NULL)
+        while (token != NULL && i!= 0)
         {
             points[i][j] = atof(token);
             j++;
