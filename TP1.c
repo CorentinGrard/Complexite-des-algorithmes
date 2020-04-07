@@ -5,8 +5,8 @@
 #include <time.h>
 
 #define BUFFER_LENGHT 255
-#define SIZE 1280
-#define FILE_NAME "cloud1280-1"
+#define SIZE 20
+#define FILE_NAME "cloud20-1"
 
 double theta(double x1, double y1, double x2, double y2);
 void swap(double points[][2], int i, int j);
@@ -134,13 +134,16 @@ void readFile(double points[][2])
     int i = 0;
     while (fgets(buffer, BUFFER_LENGHT, filePointer))
     {
-        char *token = strtok(buffer, ",");
-        int j = 0;
-        while (token != NULL && i!= 0)
+        if (i != 0)
         {
-            points[i][j] = atof(token);
-            j++;
-            token = strtok(NULL, ",");
+            char *token = strtok(buffer, ",");
+            int j = 0;
+            while (token != NULL)
+            {
+                points[i][j] = atof(token);
+                j++;
+                token = strtok(NULL, ",");
+            }
         }
         i++;
     }
