@@ -19,14 +19,21 @@ int main(int argc, char **argv)
 {
     for (int i = 0; i < SIZE; i++)
     {
+        struct timespec startTime, finish;
+        double elapsed;
         printf("Number of variables : %d\n", size[i]);
         printf("Result : %d\n", result[i]);
         clock_t start = clock();
+        clock_gettime(CLOCK_MONOTONIC, &startTime);
         solve(0, 0, result[i], size[i]);
         clock_t end = clock();
+        clock_gettime(CLOCK_MONOTONIC, &finish);
+        elapsed = (finish.tv_sec - startTime.tv_sec);
+        elapsed += (finish.tv_nsec - startTime.tv_nsec) / 1000000000.0;
         double time = ((double)end - start) / CLOCKS_PER_SEC;
+        printf("Time of exec : %f s\n", elapsed);
         printf("Number of solutions : %d\n", nbSol);
-        printf("Time of exec : %f s\n\n", time);
+        printf("Time of CPU exec : %f s\n\n", time);
     }
 }
 
